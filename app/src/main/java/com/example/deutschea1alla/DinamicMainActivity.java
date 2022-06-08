@@ -103,7 +103,7 @@ public class DinamicMainActivity extends AppCompatActivity implements View.OnCli
             params.setMargins(40, 40, 40, 40);
             FirstButtonRiw.setLayoutParams(params);
 
-            FirstButtonRiw.setText("Lesson "+fakeNumber);
+            FirstButtonRiw.setText("Урок "+fakeNumber);
             FirstButtonRiw.setTag(fakeNumber+"/"+1+"/"+TableName);
             FirstButtonRiw.setOnClickListener(this);
 

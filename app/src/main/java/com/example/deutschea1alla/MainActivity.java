@@ -47,13 +47,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         String [][] Kurses = {
-                {"1","200 Слов","words200"},
+                //{"1","200 Слов","words200"},
                 {"2","1000 Слов","words1000"},
                 {"3","ЕШКО (A1)","eshko"},
-                {"4","Deutsche (A1)","deutsche"}
+                {"4","Deutsche (A1.0)","deutschea1"},
+                {"5","Deutsche (A1.1)","deutschea2"}
         };
 
-        int numberfinishCurs = 2;
+        int numberfinishCurs = 1;
 
         finishDB = new DbFinishLesson(this);
         helper200 = new Db200Adapter(this);

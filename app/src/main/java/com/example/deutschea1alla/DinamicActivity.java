@@ -256,7 +256,7 @@ public class DinamicActivity extends AppCompatActivity implements View.OnClickLi
         String[] lessonIntent = lessonNumber.split("/");
 
         TextView lessonNumberTitle = findViewById(R.id.lessonNumber);
-        String lesTitleCustom = "Urok "+lessonIntent[0];
+        String lesTitleCustom = "Урок "+lessonIntent[0];
 
         if(lessonIntent[1].trim().equals("2")){
             setTypeWords(new int[]{1, 2});
@@ -379,7 +379,7 @@ public class DinamicActivity extends AppCompatActivity implements View.OnClickLi
             Button CorrectButton = findViewById(view.getId());
             if(userSelected == userMastSelected) {
                 CorrectButton.setTextColor(Color.GREEN);
-                message = "Geroj";
+                message = ":)";
                 this.pravilnie++;
             }else{
                 String errorString = getErrorString();
@@ -406,10 +406,11 @@ public class DinamicActivity extends AppCompatActivity implements View.OnClickLi
                         answerButton4.setTextColor(Color.GREEN);
                         break;
                 }
-                message = "Tupen";
+                message = ":(";
                 this.nePravilnie++;
             }
             showMessage(this, message);
+            //Message.message(this,message);
 
             Button nextButtonAfter = findViewById(R.id.nextButton);
             nextButtonAfter.setEnabled(true);
