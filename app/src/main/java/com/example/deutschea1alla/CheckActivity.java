@@ -1,5 +1,6 @@
 package com.example.deutschea1alla;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -46,5 +47,12 @@ public class CheckActivity extends AppCompatActivity {
     public void addData(View view) {
         helper1000.addData();
         Message.message(this,"add Data words1000 finish");
+    }
+
+    public void showSounds(View view) {
+        Intent intentRew = new Intent(this, SoundActivity.class);
+        //intentRew.putExtra("cursInfo",pageNumber);
+        //intentRew.putExtra("cursTitle",lessonIntent[1]);
+        startActivity(intentRew);
     }
 }

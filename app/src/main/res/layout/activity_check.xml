@@ -71,4 +71,16 @@
         android:textSize="11sp"
         android:textStyle="bold|italic" />
 
+    <Button
+        android:id="@+id/soundButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="300dp"
+        android:onClick="showSounds"
+        android:text="Sounds words"
+        android:textSize="11sp"
+        android:textStyle="bold|italic" />
+
     </RelativeLayout>

@@ -126,6 +126,33 @@ public class Db1000Adapter {
         //return buffer;
     }
 
+    public String[][] getFullDataArray() {
+        SQLiteDatabase db = myhelper.getWritableDatabase();
+        String[] columns = {Db1000Adapter.myDbHelper1000.UID, Db1000Adapter.myDbHelper1000.DE, Db1000Adapter.myDbHelper1000.RU, Db1000Adapter.myDbHelper1000.Sound, Db1000Adapter.myDbHelper1000.Lessons};
+        // Filter results WHERE "title" = 'My Title'
+        //String selection = Db1000Adapter.myDbHelper1000.Lessons + " = ?";
+        Cursor cursor =  db.query(Db1000Adapter.myDbHelper1000.TABLE_NAME, columns, null,null, null, null, null);
+        StringBuffer buffer = new StringBuffer();
+
+        String[][] allData = new String[1092][];
+        int i = 0;
+        while (cursor.moveToNext()) {
+            int uid = cursor.getInt(cursor.getColumnIndex(Db1000Adapter.myDbHelper1000.UID));
+            String DE = cursor.getString(cursor.getColumnIndex(Db1000Adapter.myDbHelper1000.DE));
+            String RU = cursor.getString(cursor.getColumnIndex(Db1000Adapter.myDbHelper1000.RU));
+            String Sound = cursor.getString(cursor.getColumnIndex(Db1000Adapter.myDbHelper1000.Sound));
+            int Lessons = cursor.getInt(cursor.getColumnIndex(Db1000Adapter.myDbHelper1000.Lessons));
+            String[] onedate = {uid + "", DE, RU, Lessons + "", Sound};
+            allData[i] = onedate;
+            //Currentnodes = new ArrayList<CurrentNode>();
+            //Currentnodes.add(new CurrentNode(onedate));
+            //buffer.append(cid+ "   " + name + "   " + password +" " + lesson +" \n");
+            i++;
+        }
+        return allData;
+        //return buffer;
+    }
+
     public void emptyTable(String tableName)
     {
         SQLiteDatabase db = myhelper.getWritableDatabase();
