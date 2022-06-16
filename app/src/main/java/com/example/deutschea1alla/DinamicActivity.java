@@ -306,7 +306,7 @@ public class DinamicActivity extends AppCompatActivity implements View.OnClickLi
             String [] begermod = allCurrentLesson[i];
             Currentnodes.add(new DinamicActivity.CurrentNode(begermod));
 
-            System.out.println(Currentnodes);
+            //System.out.println(Currentnodes);
 
         }
 
