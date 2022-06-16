@@ -41,6 +41,7 @@ public class DinamicMainActivity extends AppCompatActivity implements View.OnCli
 
         String TableName = cursInfoData[2];
         String CursTitle = cursInfoData[1];
+        String Location = cursInfoData[3];
 
         TextView kursTitle = findViewById(R.id.curs_title);
         kursTitle.setText(CursTitle);
@@ -104,7 +105,7 @@ public class DinamicMainActivity extends AppCompatActivity implements View.OnCli
             FirstButtonRiw.setLayoutParams(params);
 
             FirstButtonRiw.setText("Урок "+fakeNumber);
-            FirstButtonRiw.setTag(fakeNumber+"/"+1+"/"+TableName);
+            FirstButtonRiw.setTag(fakeNumber+"/"+1+"/"+TableName+"/"+Location);
             FirstButtonRiw.setOnClickListener(this);
 
             if(allElements >= numberfinishCurs) {
@@ -128,7 +129,7 @@ public class DinamicMainActivity extends AppCompatActivity implements View.OnCli
                 SecondButtonRiw.setLayoutParams(params2);
 
                 SecondButtonRiw.setText("Reverse "+fakeNumber);
-                SecondButtonRiw.setTag(fakeNumber+"/"+2+"/"+TableName);
+                SecondButtonRiw.setTag(fakeNumber+"/"+2+"/"+TableName+"/"+Location);
                 SecondButtonRiw.setOnClickListener(this);
 
                 if(allElements >= numberfinishCurs) {
@@ -137,6 +138,32 @@ public class DinamicMainActivity extends AppCompatActivity implements View.OnCli
                 }
 
                 Layouts.get(i).addView(SecondButtonRiw);
+
+            }
+
+            if (allElements < twoDimArray.size()-1) {
+                allElements++;
+                Button FinalButtonRiw = new Button(this);
+                FinalButtonRiw.setBackgroundResource(R.drawable.next_uttom);
+                //String [] secondKurs = Kurses.get([allElements]);
+                LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        1.0f
+                );
+                params2.setMargins(40, 40, 40, 40);
+                FinalButtonRiw.setLayoutParams(params2);
+
+                FinalButtonRiw.setText("Final "+fakeNumber);
+                FinalButtonRiw.setTag(fakeNumber+"/"+3+"/"+TableName+"/"+Location);
+                FinalButtonRiw.setOnClickListener(this);
+
+                if(allElements >= numberfinishCurs) {
+                    FinalButtonRiw.setEnabled(false);
+                    FinalButtonRiw.setClickable(false);
+                }
+
+                Layouts.get(i).addView(FinalButtonRiw);
 
             }
 

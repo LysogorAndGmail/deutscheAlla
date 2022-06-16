@@ -50,6 +50,8 @@ public class DinamicActivity extends AppCompatActivity implements View.OnClickLi
 
     private int[] typeWords = {2,1};
 
+    private String Location = "ua";
+
     public String[][] getAllCurrentLessonFull() {
 
         return allCurrentLessonFull;
@@ -258,15 +260,24 @@ public class DinamicActivity extends AppCompatActivity implements View.OnClickLi
         TextView lessonNumberTitle = findViewById(R.id.lessonNumber);
         String lesTitleCustom = "Урок "+lessonIntent[0];
 
+        String Location = lessonIntent[3];
+
         if(lessonIntent[1].trim().equals("2")){
             setTypeWords(new int[]{1, 2});
             lesTitleCustom += " (reverse)";
         }
+
+        if(lessonIntent[1].trim().equals("3")){
+            //setTypeWords(new int[]{5, 1});
+            TextView currentWord = findViewById(R.id.currentWord);
+            //currentWord.setVisibility(View.INVISIBLE);
+            lesTitleCustom += " (FINAL)";
+        }
+
         lessonNumberTitle.setText(lesTitleCustom);
 
         TextView realLessonNumber = findViewById(R.id.realLessonNumber);
         realLessonNumber.setText(lessonIntent[0]);
-
 
         String TableName = lessonIntent[2];
 
@@ -294,6 +305,9 @@ public class DinamicActivity extends AppCompatActivity implements View.OnClickLi
         for (int i = 0; i < allCurrentLesson.length; i++) {
             String [] begermod = allCurrentLesson[i];
             Currentnodes.add(new DinamicActivity.CurrentNode(begermod));
+
+            System.out.println(Currentnodes);
+
         }
 
         setAllCurrentLessonFull(allCurrentLesson);

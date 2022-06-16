@@ -83,8 +83,8 @@ public class SoundActivity extends AppCompatActivity implements View.OnClickList
 
             Layouts.get(i).addView(FirstButtonRiw);
 
-            if (allElements < twoDimArray.length-1) {
-                allElements++;
+            //if (allElements < twoDimArray.length-1) {
+            //    allElements++;
                 Button SecondButtonRiw = new Button(this);
                 SecondButtonRiw.setBackgroundResource(R.drawable.reverse_button);
                 //String [] secondKurs = Kurses.get([allElements]);
@@ -102,7 +102,7 @@ public class SoundActivity extends AppCompatActivity implements View.OnClickList
 
                 Layouts.get(i).addView(SecondButtonRiw);
 
-            }
+           // }
 
             show.addView(Layouts.get(i));
             if (allElements < twoDimArray.length) {

@@ -33,6 +33,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private MediaPlayer mediaPlayer = new MediaPlayer();
     private List<Button> buttonList = new ArrayList<Button>();
     public LinearLayout show;
+    public String Location = "ua";
+
+    public void setLocation(String location) {
+        this.Location = location;
+        TextView locationText = findViewById(R.id.location);
+        locationText.setText(location);
+    }
+
+    public String getLocation() {
+        return this.Location;
+    }
 
     LinearLayout layout;
     myDbAdapter helper;
@@ -48,13 +59,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         String [][] Kurses = {
                 //{"1","200 Слов","words200"},
-                {"2","1000 Слов","words1000"},
-                {"3","ЕШКО (A1)","eshko"},
-                {"4","Deutsche (A1.0)","deutschea1"},
-                {"5","Deutsche (A1.1)","deutschea2"}
+                {"2","1000 Слов","words1000","1000 Слiв"},
+                {"3","ЕШКО (A1)","eshko","eshko"},
+                {"4","Deutsche (A1.0)","deutschea1","deutschea1"},
+                {"5","Deutsche (A1.1)","deutschea2","deutschea2"}
         };
 
         int numberfinishCurs = 1;
+
+        this.setLocation(this.Location);
 
         finishDB = new DbFinishLesson(this);
         helper200 = new Db200Adapter(this);
@@ -80,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             helper1000.createTable();
             helper1000.addData();
 
-            //finishDB.ubdateFinishLesson("words1000", 18);
+            finishDB.ubdateFinishLesson("words1000", 54);
         }
 
         String finishCursFirst =  finishDB.getFinishCurs("words200");
@@ -125,9 +138,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             );
             params.setMargins(40, 40, 40, 40);
             FirstButtonRiw.setLayoutParams(params);
-
-            FirstButtonRiw.setText(oneKurs[1]);
-            FirstButtonRiw.setTag(allElements+"/"+oneKurs[1]+"/"+oneKurs[2]);
+            if(this.Location == "ua") {
+                FirstButtonRiw.setText(oneKurs[1]);
+            }else{
+                FirstButtonRiw.setText(oneKurs[3]);
+            }
+            FirstButtonRiw.setTag(allElements+"/"+oneKurs[1]+"/"+oneKurs[2]+"/"+this.Location);
             FirstButtonRiw.setOnClickListener(this);
 
             if(allElements >= numberfinishCurs) {
@@ -150,8 +166,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 params2.setMargins(40, 40, 40, 40);
                 SecondButtonRiw.setLayoutParams(params2);
                 //SecondButtonRiw.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT,1.0f));
-                SecondButtonRiw.setText(secondKurs[1]);
-                SecondButtonRiw.setTag(allElements+"/"+secondKurs[1]+"/"+secondKurs[2]);
+                if(this.Location == "ua") {
+                    SecondButtonRiw.setText(oneKurs[1]);
+                }else{
+                    SecondButtonRiw.setText(oneKurs[3]);
+                }
+                SecondButtonRiw.setTag(allElements+"/"+secondKurs[1]+"/"+secondKurs[2]+"/"+this.Location);
                 SecondButtonRiw.setOnClickListener(this);
                 if(allElements >= numberfinishCurs) {
                     SecondButtonRiw.setEnabled(false);
@@ -186,6 +206,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button checkButton = findViewById(R.id.buttonCheck);
         checkButton.setOnClickListener(this);
 
+        Button buttonUA = findViewById(R.id.buttonUA);
+        buttonUA.setOnClickListener(this);
+
+        Button buttonRU = findViewById(R.id.buttonRU);
+        buttonRU.setOnClickListener(this);
+
     }
 
     @Override
@@ -215,6 +241,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent checkIntent = new Intent(this, CheckActivity.class);
                 checkIntent.putExtra("check","1");
                 startActivity(checkIntent);
+                goToView = false;
+                break;
+
+            case R.id.buttonUA:
+                System.out.println("Location: UA");
+                this.setLocation("ua");
+                goToView = false;
+                break;
+
+            case R.id.buttonRU:
+                System.out.println("Location: RU");
+                this.setLocation("ru");
                 goToView = false;
                 break;
 
