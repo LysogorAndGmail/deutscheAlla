@@ -30,7 +30,7 @@ public class Admin3Activity extends AppCompatActivity {
        String curs = "200 slov";
        int lesson = 1;
 
-        helper.ubdateFinishLesson(curs,lesson);
+        helper.ubdateFinishLesson(curs,lesson,1);
 
 
         Message.message(this,"update (curs: "+curs+", lesson: "+lesson+")");
@@ -41,7 +41,7 @@ public class Admin3Activity extends AppCompatActivity {
         String curs = "allCurses";
         int lesson = 1;
 
-        helper.ubdateFinishLesson(curs,lesson);
+        helper.ubdateFinishLesson(curs,lesson,1);
 
         Intent refresh = new Intent(this, MainActivity.class);
         startActivity(refresh);
@@ -52,7 +52,7 @@ public class Admin3Activity extends AppCompatActivity {
 
     public void updateFineshCursesData(String curs, int lesson) {
 
-        helper.ubdateFinishLesson(curs,lesson);
+        helper.ubdateFinishLesson(curs,lesson,1);
 
         Message.message(this,"update (curs: "+curs+", allCurses: "+lesson+")");
     }

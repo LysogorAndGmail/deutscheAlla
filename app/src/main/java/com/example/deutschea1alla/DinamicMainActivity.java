@@ -62,8 +62,13 @@ public class DinamicMainActivity extends AppCompatActivity implements View.OnCli
          */
 
         String finishCurs =  finishDB.getFinishCurs(TableName);
-        //System.out.println("finish curses new "+finishCurs);
-        int numberfinishCurs = Integer.parseInt(finishCurs);
+        System.out.println("finish curses data: "+finishCurs);
+        String[] finishLessonData = finishCurs.split("/");
+        //System.out.println(finishLessonData[0]);
+        String finishKursString = finishLessonData[0];
+        String finishTypeString = finishLessonData[1];
+        int numberfinishCurs = Integer.parseInt(finishKursString);
+        int numberfinishType = Integer.parseInt(finishTypeString);
 
         int forViewFinishCurses = numberfinishCurs - 1;
         TextView vsego_projdeno_val = findViewById(R.id.vsego_projdeno_val);
@@ -89,6 +94,9 @@ public class DinamicMainActivity extends AppCompatActivity implements View.OnCli
         int fakeNumber = 1;
         for (int i=0; i<result3; i++){
 
+            System.out.println("fakeNumber: "+fakeNumber);
+            System.out.println("numberfinishCurs: "+numberfinishCurs);
+
             LinearLayout oneLauout = new LinearLayout(this);
 
             oneLauout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
@@ -107,15 +115,18 @@ public class DinamicMainActivity extends AppCompatActivity implements View.OnCli
             FirstButtonRiw.setLayoutParams(params);
 
             FirstButtonRiw.setText("Урок "+fakeNumber);
-            FirstButtonRiw.setTag(fakeNumber+"/"+1+"/"+TableName+"/"+Location);
+            FirstButtonRiw.setTag(fakeNumber+"/"+1+"/"+TableName);
             FirstButtonRiw.setOnClickListener(this);
 
-            if(allElements >= numberfinishCurs) {
-                FirstButtonRiw.setEnabled(false);
-                FirstButtonRiw.setClickable(false);
+            FirstButtonRiw.setEnabled(false);
+            FirstButtonRiw.setClickable(false);
+
+            if(fakeNumber <= numberfinishCurs) {
+                FirstButtonRiw.setEnabled(true);
+                FirstButtonRiw.setClickable(true);
             }
 
-            fakeNumber++;
+            //fakeNumber++;
 
             Layouts.get(i).addView(FirstButtonRiw);
 
@@ -133,15 +144,27 @@ public class DinamicMainActivity extends AppCompatActivity implements View.OnCli
                 SecondButtonRiw.setLayoutParams(params2);
 
                 SecondButtonRiw.setText("Reverse "+fakeNumber);
-                SecondButtonRiw.setTag(fakeNumber+"/"+2+"/"+TableName+"/"+Location);
+                SecondButtonRiw.setTag(fakeNumber+"/"+2+"/"+TableName);
                 SecondButtonRiw.setOnClickListener(this);
 
-                if(allElements >= numberfinishCurs) {
-                    SecondButtonRiw.setEnabled(false);
-                    SecondButtonRiw.setClickable(false);
+
+
+                SecondButtonRiw.setEnabled(false);
+                SecondButtonRiw.setClickable(false);
+
+                if(fakeNumber <= numberfinishCurs) {
+                    if(numberfinishType >= 2) {
+                        SecondButtonRiw.setEnabled(true);
+                        SecondButtonRiw.setClickable(true);
+                    }
                 }
 
-                fakeNumber++;
+                if(numberfinishCurs > fakeNumber) {
+                    SecondButtonRiw.setEnabled(true);
+                    SecondButtonRiw.setClickable(true);
+                }
+
+                //fakeNumber++;
                 Layouts.get(i).addView(SecondButtonRiw);
 
             }
@@ -160,15 +183,24 @@ public class DinamicMainActivity extends AppCompatActivity implements View.OnCli
                 FinalButtonRiw.setLayoutParams(params2);
 
                 FinalButtonRiw.setText("Final "+fakeNumber);
-                FinalButtonRiw.setTag(fakeNumber+"/"+3+"/"+TableName+"/"+Location);
+                FinalButtonRiw.setTag(fakeNumber+"/"+3+"/"+TableName);
                 FinalButtonRiw.setOnClickListener(this);
 
-                if(allElements >= numberfinishCurs) {
-                    FinalButtonRiw.setEnabled(false);
-                    FinalButtonRiw.setClickable(false);
+
+                FinalButtonRiw.setEnabled(false);
+                FinalButtonRiw.setClickable(false);
+                if(fakeNumber <= numberfinishCurs) {
+                    if(numberfinishType == 3) {
+                        FinalButtonRiw.setEnabled(true);
+                        FinalButtonRiw.setClickable(true);
+                    }
                 }
 
-                fakeNumber++;
+                if(numberfinishCurs > fakeNumber) {
+                    FinalButtonRiw.setEnabled(true);
+                    FinalButtonRiw.setClickable(true);
+                }
+
                 Layouts.get(i).addView(FinalButtonRiw);
 
             }
@@ -176,9 +208,9 @@ public class DinamicMainActivity extends AppCompatActivity implements View.OnCli
             show.addView(Layouts.get(i));
             if (allElements < twoDimArray.size()) {
                 allElements++;
+                fakeNumber++;
             }
         }
-         //*/
 
     }
 

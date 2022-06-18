@@ -52,6 +52,8 @@ public class DinamicActivity extends AppCompatActivity implements View.OnClickLi
 
     private String Location = "ua";
 
+    private String currentType;
+
     public String[][] getAllCurrentLessonFull() {
 
         return allCurrentLessonFull;
@@ -136,6 +138,14 @@ public class DinamicActivity extends AppCompatActivity implements View.OnClickLi
 
     public int [] getTypeWords() {
         return this.typeWords;
+    }
+
+    public void setCurrentType(String currentType) {
+        this.currentType = currentType;
+    }
+
+    public String getCurrentType() {
+        return this.currentType;
     }
 
     @Override
@@ -264,6 +274,8 @@ public class DinamicActivity extends AppCompatActivity implements View.OnClickLi
 
         TextView lessonNumberTitle = findViewById(R.id.lessonNumber);
         String lesTitleCustom = "Урок "+lessonIntent[0];
+
+        setCurrentType(lessonIntent[1]);
 
         String Location = locationDB.getLocation();
 
@@ -499,14 +511,30 @@ public class DinamicActivity extends AppCompatActivity implements View.OnClickLi
                 //}
 
                 String finishCurs =  finishDB.getFinishCurs(TableNameFromTextView);
-                int numberfinishCurs = Integer.parseInt(finishCurs);
+
+
+                String[] finishLessonData = finishCurs.split("/");
+                System.out.println(finishLessonData[0]);
+                String finishKursString = finishLessonData[0];
+                String finishTypeString = finishLessonData[1];
+
+
+                int numberfinishCurs = Integer.parseInt(finishKursString);
+
+                String currentType = getCurrentType();
 
                 Message.message(this,"normalCurrentLessonNumber: "+intRealNum+" numberfinishCurs: "+numberfinishCurs);
+                Message.message(this,"CurrentLessonType: "+currentType+" finishType: "+finishTypeString);
 
-                if(numberfinishCurs == intRealNum) {
-                    numberfinishCurs = numberfinishCurs+1;
+                if(numberfinishCurs == intRealNum && Integer.parseInt(currentType) == Integer.parseInt(finishTypeString)) {
+                    int lessonType = Integer.parseInt(currentType);
+                    lessonType++;
+                    if(lessonType == 4) {
+                        numberfinishCurs = numberfinishCurs+1;
+                        lessonType=1;
+                    }
                     Message.message(this,"Super "+intRealNum);
-                    finishDB.ubdateFinishLesson(TableNameFromTextView, numberfinishCurs);
+                    finishDB.ubdateFinishLesson(TableNameFromTextView, numberfinishCurs, lessonType);
                 }
 
                 Intent refresh = new Intent(this, DinamicMainActivity.class);

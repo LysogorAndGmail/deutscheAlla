@@ -19,8 +19,8 @@ public class DbFinishLesson {
         myhelper = new DbFinishHelper(context);
     }
 
-    public void updateFineshCursesData(String cursTitle, int i) {
-        myhelper.editFinishCurs(cursTitle,i);
+    public void updateFineshCursesData(String cursTitle, int i,int type) {
+        myhelper.editFinishCurs(cursTitle,i,type);
     }
 
     static class DbFinishHelper extends SQLiteOpenHelper
@@ -31,8 +31,9 @@ public class DbFinishLesson {
         private static final String UID="id";     // Column I (Primary Key)
         private static final String curs = "curs";    //Column II
         private static final String lesson= "lesson";    // Column III
+        private static final String type= "type";    // Column III
         private static final String CREATE_TABLE = "CREATE TABLE "+TABLE_NAME+
-                " ("+UID+" INTEGER PRIMARY KEY AUTOINCREMENT, "+ curs +" VARCHAR(255) ,"+ lesson +" VARCHAR(225));";
+                " ("+UID+" INTEGER PRIMARY KEY AUTOINCREMENT, "+ curs +" VARCHAR(255) ,"+ lesson +" VARCHAR(225) ,"+ type +" VARCHAR(225));";
         //private static final String DROP_TABLE ="DROP TABLE IF EXISTS "+TABLE_NAME;
         private Context context;
 
@@ -61,9 +62,9 @@ public class DbFinishLesson {
             }
         }
 
-        public void editFinishCurs(String curs,int lesson){
+        public void editFinishCurs(String curs,int lesson,int type){
             SQLiteDatabase db = this.getWritableDatabase();
-            String strSQL = "UPDATE "+TABLE_NAME+" SET lesson = "+lesson+" WHERE curs = '"+curs+"'";
+            String strSQL = "UPDATE "+TABLE_NAME+" SET lesson = "+lesson+",type = "+type+" WHERE curs = '"+curs+"'";
             db.execSQL(strSQL);
         }
 
@@ -75,13 +76,14 @@ public class DbFinishLesson {
         ContentValues contentValues = new ContentValues();
         contentValues.put(DbFinishLesson.DbFinishHelper.curs, curs);
         contentValues.put(DbFinishLesson.DbFinishHelper.lesson, 1);
+        contentValues.put(DbFinishLesson.DbFinishHelper.type, 1);
         long id = dbb.insert(DbFinishLesson.DbFinishHelper.TABLE_NAME, null , contentValues);
         return id;
     }
 
-    public void ubdateFinishLesson(String curs, int lesson)
+    public void ubdateFinishLesson(String curs, int lesson, int type)
     {
-        myhelper.editFinishCurs(curs,lesson);
+        myhelper.editFinishCurs(curs,lesson,type);
     }
 
     public String getFinishCurs(String curs){
@@ -102,7 +104,7 @@ public class DbFinishLesson {
                 if (cursor.moveToFirst()) {
                     do {
                         // Get version from Cursor
-                        cursData = cursor.getString(cursor.getColumnIndex("lesson"));
+                        cursData = cursor.getString(cursor.getColumnIndex("lesson"))+"/"+cursor.getString(cursor.getColumnIndex("type"));
 
                         // add the bookName into the bookTitles ArrayList
 

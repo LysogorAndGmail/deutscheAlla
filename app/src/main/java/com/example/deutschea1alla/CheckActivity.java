@@ -56,7 +56,7 @@ public class CheckActivity extends AppCompatActivity {
     public void addData(View view) {
         locationDB.addFirstLocation();
         finishDB.addFirstData("allCurses");
-        finishDB.ubdateFinishLesson("allCurses",1);
+        finishDB.ubdateFinishLesson("allCurses",1,1);
         finishDB.addFirstData("words1000");
         helper1000.addData();
         Message.message(this,"add Data words1000 finish");

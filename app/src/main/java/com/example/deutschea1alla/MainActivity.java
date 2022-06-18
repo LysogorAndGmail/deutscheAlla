@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             finishDB.emptyTable("finish");
             finishDB.createTable();
             finishDB.addFirstData("allCurses");
-            finishDB.ubdateFinishLesson("allCurses",numberfinishCurs);
+            finishDB.ubdateFinishLesson("allCurses",numberfinishCurs,1);
             /*
             finishDB.addFirstData("words200");
             helper200.emptyTable("words200");
