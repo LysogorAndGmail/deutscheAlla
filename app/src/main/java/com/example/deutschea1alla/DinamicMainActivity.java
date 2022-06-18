@@ -25,7 +25,7 @@ public class DinamicMainActivity extends AppCompatActivity implements View.OnCli
 
     LinearLayout layout;
     myDbAdapter helper;
-    Db200Adapter helper200;
+    //Db200Adapter helper200;
     Db1000Adapter helper1000;
     DbFinishLesson finishDB;
     @SuppressLint("SetTextI18n")
@@ -46,18 +46,20 @@ public class DinamicMainActivity extends AppCompatActivity implements View.OnCli
         TextView kursTitle = findViewById(R.id.curs_title);
         kursTitle.setText(CursTitle);
 
-        helper200 = new Db200Adapter(this);
+        //helper200 = new Db200Adapter(this);
         helper1000 = new Db1000Adapter(this);
         finishDB = new DbFinishLesson(this);
 
 
-        ArrayList twoDimArray = helper200.getDataArray();
+        ArrayList twoDimArray = helper1000.getDataArray();
 
+        /*
         switch (TableName) {
             case "words1000":
                 twoDimArray = helper1000.getDataArray();
             break;
         }
+         */
 
         String finishCurs =  finishDB.getFinishCurs(TableName);
         //System.out.println("finish curses new "+finishCurs);
@@ -113,6 +115,8 @@ public class DinamicMainActivity extends AppCompatActivity implements View.OnCli
                 FirstButtonRiw.setClickable(false);
             }
 
+            fakeNumber++;
+
             Layouts.get(i).addView(FirstButtonRiw);
 
             if (allElements < twoDimArray.size()-1) {
@@ -137,6 +141,7 @@ public class DinamicMainActivity extends AppCompatActivity implements View.OnCli
                     SecondButtonRiw.setClickable(false);
                 }
 
+                fakeNumber++;
                 Layouts.get(i).addView(SecondButtonRiw);
 
             }
@@ -163,6 +168,7 @@ public class DinamicMainActivity extends AppCompatActivity implements View.OnCli
                     FinalButtonRiw.setClickable(false);
                 }
 
+                fakeNumber++;
                 Layouts.get(i).addView(FinalButtonRiw);
 
             }
@@ -170,7 +176,6 @@ public class DinamicMainActivity extends AppCompatActivity implements View.OnCli
             show.addView(Layouts.get(i));
             if (allElements < twoDimArray.size()) {
                 allElements++;
-                fakeNumber++;
             }
         }
          //*/

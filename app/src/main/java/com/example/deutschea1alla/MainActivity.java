@@ -47,9 +47,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     LinearLayout layout;
     myDbAdapter helper;
-    Db200Adapter helper200;
+    //Db200Adapter helper200;
     Db1000Adapter helper1000;
     DbFinishLesson finishDB;
+    DbLocation locationDB;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -60,17 +61,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String [][] Kurses = {
                 //{"1","200 Слов","words200"},
                 {"2","1000 Слов","words1000","1000 Слiв"},
-                {"3","ЕШКО (A1)","eshko","eshko"},
-                {"4","Deutsche (A1.0)","deutschea1","deutschea1"},
-                {"5","Deutsche (A1.1)","deutschea2","deutschea2"}
+                {"3","ЕШКО (A1)","eshko","ЕШКО (A1)"},
+                {"4","Deutsche (A1.0)","deutschea1","Deutsche (A1.0)"},
+                {"5","Deutsche (A1.1)","deutschea2","Deutsche (A1.1)"}
         };
 
         int numberfinishCurs = 1;
 
-        this.setLocation(this.Location);
-
+        locationDB = new DbLocation(this);
         finishDB = new DbFinishLesson(this);
-        helper200 = new Db200Adapter(this);
+        //helper200 = new Db200Adapter(this);
         helper1000 = new Db1000Adapter(this);
 
         String finishCurs =  finishDB.getFinishCurs("allCurses");
@@ -78,22 +78,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         info1.setText("finishDB.getFinishCurs(allCurses): "+finishCurs);
 
         if(finishCurs.length() == 0) {
+
+            locationDB.createTable();
+            locationDB.addFirstLocation();
+
             finishDB.emptyTable("finish");
             finishDB.createTable();
             finishDB.addFirstData("allCurses");
             finishDB.ubdateFinishLesson("allCurses",numberfinishCurs);
-
+            /*
             finishDB.addFirstData("words200");
             helper200.emptyTable("words200");
             helper200.createTable();
             helper200.addData();
-
+            */
             finishDB.addFirstData("words1000");
             helper1000.emptyTable("words1000");
             helper1000.createTable();
             helper1000.addData();
 
-            finishDB.ubdateFinishLesson("words1000", 54);
+            //finishDB.ubdateFinishLesson("words1000", 54);
         }
 
         String finishCursFirst =  finishDB.getFinishCurs("words200");
@@ -104,13 +108,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         TextView info3 = findViewById(R.id.info3);
         info3.setText("finishDB.getFinishCurs(words1000): "+finishCursFirst2);
 
-        ArrayList twoDimArray200 = helper200.getDataArray();
-        TextView info4 = findViewById(R.id.info4);
-        info4.setText("helper200.getDataArray(): "+twoDimArray200.size());
+        //ArrayList twoDimArray200 = helper200.getDataArray();
+        //TextView info4 = findViewById(R.id.info4);
+        //info4.setText("helper200.getDataArray(): "+twoDimArray200.size());
 
         ArrayList twoDimArray1000 = helper1000.getDataArray();
         TextView info5 = findViewById(R.id.info5);
         info5.setText("helper1000.getDataArray(): "+twoDimArray1000.size());
+
+        String location = locationDB.getLocation();
+        this.setLocation(location);
 
         show = (LinearLayout) findViewById(R.id.show);
 
@@ -138,10 +145,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             );
             params.setMargins(40, 40, 40, 40);
             FirstButtonRiw.setLayoutParams(params);
-            if(this.Location == "ua") {
-                FirstButtonRiw.setText(oneKurs[1]);
-            }else{
+            if(this.Location.trim().equals("ua")) {
                 FirstButtonRiw.setText(oneKurs[3]);
+            }else{
+                FirstButtonRiw.setText(oneKurs[1]);
             }
             FirstButtonRiw.setTag(allElements+"/"+oneKurs[1]+"/"+oneKurs[2]+"/"+this.Location);
             FirstButtonRiw.setOnClickListener(this);
@@ -166,10 +173,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 params2.setMargins(40, 40, 40, 40);
                 SecondButtonRiw.setLayoutParams(params2);
                 //SecondButtonRiw.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT,1.0f));
-                if(this.Location == "ua") {
-                    SecondButtonRiw.setText(oneKurs[1]);
+                if(this.Location.trim().equals("ua")) {
+                    SecondButtonRiw.setText(secondKurs[3]);
                 }else{
-                    SecondButtonRiw.setText(oneKurs[3]);
+                    SecondButtonRiw.setText(secondKurs[1]);
                 }
                 SecondButtonRiw.setTag(allElements+"/"+secondKurs[1]+"/"+secondKurs[2]+"/"+this.Location);
                 SecondButtonRiw.setOnClickListener(this);
@@ -246,12 +253,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.buttonUA:
                 System.out.println("Location: UA");
+                locationDB.ubdateLocation("ua");
                 this.setLocation("ua");
+                Intent mainIntent = new Intent(this, MainActivity.class);
+                startActivity(mainIntent);
                 goToView = false;
                 break;
 
             case R.id.buttonRU:
                 System.out.println("Location: RU");
+                locationDB.ubdateLocation("ru");
+                Intent mainIntent2 = new Intent(this, MainActivity.class);
+                startActivity(mainIntent2);
                 this.setLocation("ru");
                 goToView = false;
                 break;

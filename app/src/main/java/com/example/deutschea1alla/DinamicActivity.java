@@ -244,7 +244,8 @@ public class DinamicActivity extends AppCompatActivity implements View.OnClickLi
 
     }
 
-    Db200Adapter helper200;
+    DbLocation locationDB;
+    //Db200Adapter helper200;
     Db1000Adapter helper1000;
     DbFinishLesson finishDB;
     MediaPlayer mp;
@@ -253,6 +254,10 @@ public class DinamicActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dinamic);
 
+        locationDB = new DbLocation(this);
+        //helper200 = new Db200Adapter(this);
+        helper1000 = new Db1000Adapter(this);
+
         Intent intent = getIntent();
         String lessonNumber = intent.getStringExtra("lesson");
         String[] lessonIntent = lessonNumber.split("/");
@@ -260,17 +265,30 @@ public class DinamicActivity extends AppCompatActivity implements View.OnClickLi
         TextView lessonNumberTitle = findViewById(R.id.lessonNumber);
         String lesTitleCustom = "Урок "+lessonIntent[0];
 
-        String Location = lessonIntent[3];
+        String Location = locationDB.getLocation();
+
+        //System.out.println(Location);
+
+        if(Location.trim().equals("ua")) {
+            setTypeWords(new int[]{5, 1});
+        }
 
         if(lessonIntent[1].trim().equals("2")){
             setTypeWords(new int[]{1, 2});
             lesTitleCustom += " (reverse)";
+
+            ImageButton mainSound = findViewById(R.id.mainSound);
+            mainSound.setVisibility(View.INVISIBLE);
+
+            if(Location.trim().equals("ua")) {
+                setTypeWords(new int[]{1, 5});
+            }
         }
 
         if(lessonIntent[1].trim().equals("3")){
             //setTypeWords(new int[]{5, 1});
             TextView currentWord = findViewById(R.id.currentWord);
-            //currentWord.setVisibility(View.INVISIBLE);
+            currentWord.setVisibility(View.INVISIBLE);
             lesTitleCustom += " (FINAL)";
         }
 
@@ -279,22 +297,23 @@ public class DinamicActivity extends AppCompatActivity implements View.OnClickLi
         TextView realLessonNumber = findViewById(R.id.realLessonNumber);
         realLessonNumber.setText(lessonIntent[0]);
 
+        //System.out.println("real lesson Number: "+lessonIntent[0]);
+
+
         String TableName = lessonIntent[2];
 
         TextView tableNameTextView = findViewById(R.id.tableName);
         tableNameTextView.setText(TableName);
 
-        helper200 = new Db200Adapter(this);
-        helper1000 = new Db1000Adapter(this);
-
-        String[][] allCurrentLesson =  helper200.getDataArrayLesson(lessonIntent[0]);
-
+        String[][] allCurrentLesson =  helper1000.getDataArrayLesson(lessonIntent[0]);
+        /*
         switch(TableName) {
             case "words1000":
                 allCurrentLesson =  helper1000.getDataArrayLesson(lessonIntent[0]);
                 break;
             default:
         }
+         */
 
         ProgressBar simpleProgressBar=(ProgressBar)findViewById(R.id.progressBar); // initiate the progress bar
         simpleProgressBar.setMax(allCurrentLesson.length); // 100 maximum value for the progress value
@@ -305,9 +324,6 @@ public class DinamicActivity extends AppCompatActivity implements View.OnClickLi
         for (int i = 0; i < allCurrentLesson.length; i++) {
             String [] begermod = allCurrentLesson[i];
             Currentnodes.add(new DinamicActivity.CurrentNode(begermod));
-
-            //System.out.println(Currentnodes);
-
         }
 
         setAllCurrentLessonFull(allCurrentLesson);
@@ -474,21 +490,22 @@ public class DinamicActivity extends AppCompatActivity implements View.OnClickLi
 
                 TextView realLessonNumber = findViewById(R.id.realLessonNumber);
                 String realLessonNumberView = realLessonNumber.getText().toString();
+                //System.out.println("real lesson number: "+realLessonNumberView);
                 int intRealNum = Integer.parseInt(realLessonNumberView);
-                int normalCurrentLessonNumber = intRealNum * 2 - 1;
+                //int normalCurrentLessonNumber = intRealNum * 2 - 1;
                 //realLessonNumber.setText(normalCurrentLessonNumber.toString());
-                if(rev[0] == 1) {
-                    normalCurrentLessonNumber++;
-                }
+                //if(rev[0] == 1) {
+                //    normalCurrentLessonNumber++;
+                //}
 
                 String finishCurs =  finishDB.getFinishCurs(TableNameFromTextView);
                 int numberfinishCurs = Integer.parseInt(finishCurs);
 
-                Message.message(this,"normalCurrentLessonNumber: "+normalCurrentLessonNumber+" numberfinishCurs: "+numberfinishCurs);
+                Message.message(this,"normalCurrentLessonNumber: "+intRealNum+" numberfinishCurs: "+numberfinishCurs);
 
-                if(numberfinishCurs == normalCurrentLessonNumber) {
+                if(numberfinishCurs == intRealNum) {
                     numberfinishCurs = numberfinishCurs+1;
-                    Message.message(this,"Super "+normalCurrentLessonNumber);
+                    Message.message(this,"Super "+intRealNum);
                     finishDB.ubdateFinishLesson(TableNameFromTextView, numberfinishCurs);
                 }
 
@@ -508,7 +525,7 @@ public class DinamicActivity extends AppCompatActivity implements View.OnClickLi
             DinamicActivity.CurrentNode mastSelected = currentLessonWords.get(randomNumberFromWordArray);
 
             // gdeto tut
-            System.out.println(mastSelected.toString());
+            //System.out.println(mastSelected.toString());
             String SoundWord = mastSelected.getNodeData(4);
             TextView soundValue = findViewById(R.id.soundValue);
             soundValue.setText(SoundWord);

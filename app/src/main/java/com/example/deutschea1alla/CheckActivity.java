@@ -9,12 +9,17 @@ import java.util.ArrayList;
 
 public class CheckActivity extends AppCompatActivity {
 
+    DbLocation locationDB;
+    DbFinishLesson finishDB;
     Db1000Adapter helper1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check);
+
+        locationDB = new DbLocation(this);
+        finishDB = new DbFinishLesson(this);
         helper1000 = new Db1000Adapter(this);
     }
 
@@ -35,16 +40,24 @@ public class CheckActivity extends AppCompatActivity {
     }
 
     public void deleteData(View view) {
+        helper1000.emptyTable("location");
+        helper1000.emptyTable("finish");
         helper1000.emptyTable("words1000");
         Message.message(this,"delete table words1000");
     }
 
     public void createTable(View view) {
+        locationDB.createTable();
+        finishDB.createTable();
         helper1000.createTable();
         Message.message(this,"create table words1000");
     }
 
     public void addData(View view) {
+        locationDB.addFirstLocation();
+        finishDB.addFirstData("allCurses");
+        finishDB.ubdateFinishLesson("allCurses",1);
+        finishDB.addFirstData("words1000");
         helper1000.addData();
         Message.message(this,"add Data words1000 finish");
     }

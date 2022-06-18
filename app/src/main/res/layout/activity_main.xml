@@ -110,7 +110,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="270dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="10dp"
         android:text="@string/app_version"
         android:textColor="@android:color/white" />
 
@@ -119,8 +119,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="270dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginLeft="360dp"
+        android:layout_marginTop="10dp"
         android:text=""
         android:textColor="@android:color/white" />
 
@@ -167,6 +167,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="300dp"
         android:layout_marginTop="1dp"
+        android:visibility="invisible"
         android:background="@android:color/holo_blue_dark"
         android:tag="admin/1"
         android:text="Check" />
@@ -178,8 +179,9 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
-        android:textColor="@android:color/white"
-        android:text="info 1" />
+        android:visibility="invisible"
+        android:text="info 1"
+        android:textColor="@android:color/white" />
 
     <TextView
         android:id="@+id/info2"
@@ -189,6 +191,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="25dp"
         android:textColor="@android:color/white"
+        android:visibility="invisible"
         android:text="info 2" />
 
     <TextView
@@ -198,6 +201,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="40dp"
+        android:visibility="invisible"
         android:textColor="@android:color/white"
         android:text="info 3" />
 
@@ -208,6 +212,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="55dp"
+        android:visibility="invisible"
         android:textColor="@android:color/white"
         android:text="info 4" />
 
@@ -218,6 +223,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="70dp"
+        android:visibility="invisible"
         android:textColor="@android:color/white"
         android:text="info 5" />
 
