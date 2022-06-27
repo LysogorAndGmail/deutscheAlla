@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".CheckActivity"
+    tools:context="my.deutscheaalla.CheckActivity"
     android:background="@android:color/holo_blue_dark">
 
     <Button

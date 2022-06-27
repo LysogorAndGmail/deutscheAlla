@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.deutschea1alla">
+    package="my.deutscheaalla">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -13,40 +13,40 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DeutscheA1Alla">
         <activity
-            android:name=".SoundActivity"
+            android:name="my.deutscheaalla.SoundActivity"
             android:exported="false" />
         <activity
-            android:name=".CheckActivity"
+            android:name="my.deutscheaalla.CheckActivity"
             android:exported="false" />
         <activity
-            android:name=".Admin3Activity"
+            android:name="my.deutscheaalla.Admin3Activity"
             android:exported="false" />
         <activity
-            android:name=".DinamicMainActivity"
+            android:name="my.deutscheaalla.DinamicMainActivity"
             android:exported="false" />
         <activity
-            android:name=".DinamicActivity"
+            android:name="my.deutscheaalla.DinamicActivity"
             android:exported="false" />
         <activity
-            android:name=".Words200MainActivity"
+            android:name="my.deutscheaalla.Words200MainActivity"
             android:exported="false" />
         <activity
-            android:name=".Admin2Activity"
+            android:name="my.deutscheaalla.Admin2Activity"
             android:exported="false" />
         <activity
-            android:name=".Words200Activity"
+            android:name="my.deutscheaalla.Words200Activity"
             android:exported="false" />
         <activity
-            android:name=".LessonMainActivity"
+            android:name="my.deutscheaalla.LessonMainActivity"
             android:exported="false" />
         <activity
-            android:name=".AdminActivity"
+            android:name="my.deutscheaalla.AdminActivity"
             android:exported="false" />
         <activity
-            android:name=".LessonActivity"
+            android:name="my.deutscheaalla.LessonActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name="my.deutscheaalla.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

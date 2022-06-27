@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@drawable/gradient_background"
-    tools:context=".MainActivity">
+    tools:context="my.deutscheaalla.MainActivity">
 
     <LinearLayout
         android:layout_width="100dp"
