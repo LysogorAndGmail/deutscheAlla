@@ -1,5 +1,6 @@
 package my.deutscheaalla;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -493,7 +494,9 @@ public class DinamicActivity extends AppCompatActivity implements View.OnClickLi
         if(currentLessonWords.size() == 0){
             String printerrorString = getErrorString();
             //System.out.println(printerrorString);
-            showModal(printerrorString);
+
+
+
             if(printerrorString.length() == 0) {
                 finishDB = new DbFinishLesson(this);
 
@@ -514,7 +517,7 @@ public class DinamicActivity extends AppCompatActivity implements View.OnClickLi
 
 
                 String[] finishLessonData = finishCurs.split("/");
-                System.out.println(finishLessonData[0]);
+                //System.out.println(finishLessonData[0]);
                 String finishKursString = finishLessonData[0];
                 String finishTypeString = finishLessonData[1];
 
@@ -523,8 +526,8 @@ public class DinamicActivity extends AppCompatActivity implements View.OnClickLi
 
                 String currentType = getCurrentType();
 
-                Message.message(this,"normalCurrentLessonNumber: "+intRealNum+" numberfinishCurs: "+numberfinishCurs);
-                Message.message(this,"CurrentLessonType: "+currentType+" finishType: "+finishTypeString);
+                //Message.message(this,"normalCurrentLessonNumber: "+intRealNum+" numberfinishCurs: "+numberfinishCurs);
+                //Message.message(this,"CurrentLessonType: "+currentType+" finishType: "+finishTypeString);
 
                 if(numberfinishCurs == intRealNum && Integer.parseInt(currentType) == Integer.parseInt(finishTypeString)) {
                     int lessonType = Integer.parseInt(currentType);
@@ -538,9 +541,14 @@ public class DinamicActivity extends AppCompatActivity implements View.OnClickLi
                 }
 
                 Intent refresh = new Intent(this, DinamicMainActivity.class);
+                String Location = locationDB.getLocation();
+                String cursInfo = "0/1000 Слов/words1000/"+Location;
+                refresh.putExtra("cursInfo",cursInfo);
                 startActivity(refresh);
                 this.finish();
 
+            }else{
+                showModal(printerrorString);
             }
         }else{
             //System.out.println(currentLessonWords.size());
@@ -684,6 +692,8 @@ public class DinamicActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
+
+
     private void showMessage(DinamicActivity lessonActivity, String message) {
         Toast toast = Toast.makeText(lessonActivity, message, Toast.LENGTH_SHORT);
         toast.show();
@@ -731,7 +741,13 @@ public class DinamicActivity extends AppCompatActivity implements View.OnClickLi
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                //System.out.println("nagal ok");
+                System.out.println("nagal ok");
+                Intent refresh = new Intent(DinamicActivity.this,DinamicMainActivity.class);
+                String Location = locationDB.getLocation();
+                String cursInfo = "0/1000 Слов/words1000/"+Location;
+                refresh.putExtra("cursInfo",cursInfo);
+                startActivity(refresh);
+                //this.finish();
             }
         });
         builder.create().show();

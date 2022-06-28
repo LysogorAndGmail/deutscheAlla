@@ -237,7 +237,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.buttonUA:
-                System.out.println("Location: UA");
+                //System.out.println("Location: UA");
                 locationDB.ubdateLocation("ua");
                 this.setLocation("ua");
                 Intent mainIntent = new Intent(this, MainActivity.class);
@@ -246,7 +246,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.buttonRU:
-                System.out.println("Location: RU");
+                //System.out.println("Location: RU");
                 locationDB.ubdateLocation("ru");
                 Intent mainIntent2 = new Intent(this, MainActivity.class);
                 startActivity(mainIntent2);
@@ -260,7 +260,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ///*
             String pageNumber = view.getTag().toString();
             //String[] lessonIntent = pageNumber.split("/");
-            //System.out.println(pageNumber);
+            System.out.println("view.getTag().toString(): "+pageNumber);
 
             Intent intentRew = new Intent(this, DinamicMainActivity.class);
             intentRew.putExtra("cursInfo",pageNumber);

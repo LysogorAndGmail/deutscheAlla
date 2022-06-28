@@ -155,10 +155,10 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="200dp"
         android:layout_marginTop="1dp"
-        android:visibility="invisible"
         android:background="@android:color/holo_blue_dark"
         android:tag="admin/3"
-        android:text="Admin 3" />
+        android:text="Admin 3"
+        android:visibility="invisible" />
 
     <Button
         android:id="@+id/buttonCheck"
@@ -169,8 +169,8 @@
         android:layout_marginTop="1dp"
         android:background="@android:color/holo_blue_dark"
         android:tag="admin/1"
-        android:visibility="invisible"
-        android:text="Check" />
+        android:text="Check"
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/info1"
