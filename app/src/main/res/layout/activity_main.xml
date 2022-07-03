@@ -170,7 +170,7 @@
         android:background="@android:color/holo_blue_dark"
         android:tag="admin/1"
         android:text="Check"
-        android:visibility="invisible" />
+         />
 
     <TextView
         android:id="@+id/info1"

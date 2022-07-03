@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             helper1000.createTable();
             helper1000.addData();
 
-            //finishDB.ubdateFinishLesson("words1000", 54);
+            //finishDB.ubdateFinishLesson("words1000", 540, 3);
         }
 
         String finishCursFirst =  finishDB.getFinishCurs("words200");
