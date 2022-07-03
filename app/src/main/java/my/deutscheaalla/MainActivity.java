@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Db1000Adapter helper1000;
     DbFinishLesson finishDB;
     DbLocation locationDB;
+    DbVersion dbVersion;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -53,10 +54,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         int numberfinishCurs = 1;
 
+        String currVersion = getResources().getString(R.string.db_version);
+
         locationDB = new DbLocation(this);
         finishDB = new DbFinishLesson(this);
         //helper200 = new Db200Adapter(this);
         helper1000 = new Db1000Adapter(this);
+        dbVersion = new DbVersion(this);
+
 
         String finishCurs =  finishDB.getFinishCurs("allCurses");
         TextView info1 = findViewById(R.id.info1);
@@ -82,8 +87,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             helper1000.createTable();
             helper1000.addData();
 
+            dbVersion.createTable();
+            dbVersion.addFirstVersion(currVersion);
+
             //finishDB.ubdateFinishLesson("words1000", 540, 3);
         }
+
+        String version =  dbVersion.getVersion();
+
+        //int DBVersion = R.string.app_version;
+        //System.out.println(currVersion);
+        if(version.length() == 0) {
+            dbVersion.createTable();
+            dbVersion.addFirstVersion(currVersion);
+            helper1000.emptyTable("words1000");
+            helper1000.createTable();
+            helper1000.addData();
+        }
+
+        if(!version.equals(currVersion)) {
+            helper1000.emptyTable("words1000");
+            helper1000.createTable();
+            helper1000.addData();
+        }
+
+
 
         String finishCursFirst =  finishDB.getFinishCurs("words200");
         TextView info2 = findViewById(R.id.info2);

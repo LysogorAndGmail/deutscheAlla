@@ -26,13 +26,13 @@ public class DbLocation {
     {
         private static final String DATABASE_NAME = "myDatabase";    // Database Name
         private static final String TABLE_NAME = "location";   // Table Name
-        private static final int DATABASE_Version = 1;   // Database Version
+        private static final int DATABASE_Version = 2;   // Database Version
         private static final String UID="id";     // Column I (Primary Key)
         private static final String lang = "lang";    //Column II
 
         private static final String CREATE_TABLE = "CREATE TABLE "+TABLE_NAME+
                 " ("+UID+" INTEGER PRIMARY KEY AUTOINCREMENT, "+ lang +" VARCHAR(255));";
-        //private static final String DROP_TABLE ="DROP TABLE IF EXISTS "+TABLE_NAME;
+        private static final String DROP_TABLE ="DROP TABLE IF EXISTS "+TABLE_NAME;
         private Context context;
 
         public DbLocationHelper(Context context) {
@@ -53,8 +53,8 @@ public class DbLocation {
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             try {
                 Message.message(context,"OnUpgrade");
-                //db.execSQL(DROP_TABLE);
-                //onCreate(db);
+                db.execSQL(DROP_TABLE);
+                onCreate(db);
             }catch (Exception e) {
                 Message.message(context,""+e);
             }

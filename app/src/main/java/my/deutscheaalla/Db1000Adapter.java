@@ -23,7 +23,7 @@ public class Db1000Adapter {
     {
         private static final String DATABASE_NAME = "myDatabase";    // Database Name
         private static final String TABLE_NAME = "words1000";   // Table Name
-        private static final int DATABASE_Version = 1;   // Database Version
+        private static final int DATABASE_Version = 2;   // Database Version
         private static final String UID="id";     // Column I (Primary Key)
         private static final String DE = "DE";    //Column II
         private static final String RU = "RU";    // Column III
@@ -32,7 +32,7 @@ public class Db1000Adapter {
         private static final String Lessons= "lesson";    // Column 4
         private static final String CREATE_TABLE = "CREATE TABLE "+TABLE_NAME+
                 " ("+UID+" INTEGER PRIMARY KEY AUTOINCREMENT, "+ DE +" VARCHAR(255) ,"+ RU +" VARCHAR(225), "+ UA +" VARCHAR(225), "+ Sound +" VARCHAR(225), "+ Lessons +" INTEGER);";
-        //private static final String DROP_TABLE ="DROP TABLE IF EXISTS "+TABLE_NAME;
+        private static final String DROP_TABLE ="DROP TABLE IF EXISTS "+TABLE_NAME;
         private Context context;
 
         public myDbHelper1000(Context context) {
@@ -53,8 +53,8 @@ public class Db1000Adapter {
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             try {
                 Message.message(context,"OnUpgrade");
-                //db.execSQL(DROP_TABLE);
-                //onCreate(db);
+                db.execSQL(DROP_TABLE);
+                onCreate(db);
             }catch (Exception e) {
                 Message.message(context,""+e);
             }
@@ -276,7 +276,7 @@ public class Db1000Adapter {
                 {"die Schwiegermutter","тёща, свекровь","a42","Теща, свекруха"},
                 {"der Onkel","дядя","a43","Дядько",},
                 {"die Tante","тетя","a44","Тiтка"},
-                {"der Cousin [кузэн]","двоюродный брат","a45","Двоюрiдний брат"},
+                {"der Cousin","двоюродный брат","a45","Двоюрiдний брат"},
                 {"die Kusine","двоюродная сестра","a46","Двоюрiдна сестра"},
                 {"der Neffe","племянник","a47","Племiнник"},
                 {"die Nichte","племянница","a48","Племiнниця"},
@@ -702,14 +702,14 @@ public class Db1000Adapter {
                 {"das Notizbuch","блокнот","a364","Блокнот"},
                 {"die Notiz","пометка, запись","a365","Помітка, запис"},
                 {"das Wörterbuch","словарь","a366","Словник"},
-                {"der Buchstabe","буква","буква","a367","Літера"},
+                {"der Buchstabe","буква","a367","Літера"},
                 {"der Brief","письмо","a368","Лист"},
                 {"der Umschlag","конверт","a369", "Конверт"},
                 {"das Papier","бумага","a370", "Папір"},
                 {"die Zeitung","газета","a371","Газета"},
                 {"die Zeitschrift","журнал","a372","Журнал"},
                 {"das Telefon","телефон","a373","Телефон"},
-                {"das Handy [хэнди]","сотовый телефон","a374","Стільниковий телефон"},
+                {"das Handy","сотовый телефон","a374","Стільниковий телефон"},
                 {"die Uhr","часы","a375","Годинник"},
         };
 
@@ -825,10 +825,10 @@ public class Db1000Adapter {
                 {"das T-Shirt","футболка","a455","Футболка"},
                 {"die Kravatte","галстук","a456","Галстук"},
                 {"die Hose","брюки, штаны","a457","Брюки Штани"},
-                {"die Shorts [шортс]","шорты","a458","Шорти"},
+                {"die Shorts","шорты","a458","Шорти"},
                 {"die Strumpfhose","колготки","a459","Колготки"},
                 {"die Strümpfe","чулки","a460","Панчохи"},
-                {"die Jeans [джинз]","джинсы","a461","Джинсы"},
+                {"die Jeans","джинсы","a461","Джинсы"},
                 {"die Kapuze","капюшон","a462","Капюшон"},
                 {"der Gürtel","ремень","a463", "Ремінь"},
                 {"die Unterwäsche","нижнее белье","a464","Нижня білизна"},
@@ -1552,7 +1552,7 @@ public class Db1000Adapter {
                 {"kämpfen","бороться","a1006","боротися"},
                 {"fangen","ловить","a1007","ловити"},
                 {"befürchten","бояться, опасаться","a1008", "боятися, побоюватися"},
-                {"interessieren, sich","интересоваться","a1009","цікавитися"},
+                {"interessieren","интересоваться","a1009","цікавитися"},
                 {"überraschen","удивлять","a1010","дивувати"},
                 {"aufstehen","вставать","a1011","вставати"},
                 {"ziehen","тянуть; перемещаться","a1012","тягнути; переміщатися"},
@@ -1563,7 +1563,7 @@ public class Db1000Adapter {
                 {"arbeiten","работать","a1017","працювати"},
                 {"fernsehen","смотреть телевизор","a1018","дивитися телевізор"},
                 {"waschen","мыть, cтирать","a1019","мити, прати"},
-                {"rasieren, sich","бриться","a1020","голитися"},
+                {"rasieren","бриться","a1020","голитися"},
                 {"versuchen","пытаться, пробовать","a1021", "намагатися, пробувати"},
                 {"feiern","праздновать","a1022","святкувати"},
                 {"lächeln","улыбаться","a1023","посміхатися"},
@@ -1600,7 +1600,7 @@ public class Db1000Adapter {
                 {"schreien","кричать","a1046","кричати"},
                 {"träumen","мечтать; видеть сон","a1047","мріяти; бачити сон"},
                 {"hoffen","надеяться","a1048","сподіватися"},
-                {"erinnern, sich","вспоминать","a1049","згадувати"},
+                {"abrufen","вспоминать","a1049","згадувати"},
                 {"erinnern","напоминать","a1050","нагадувати"},
         };
 
@@ -1613,7 +1613,7 @@ public class Db1000Adapter {
                 {"genießen","наслаждаться; пользоваться","a1051","насолоджуватися; користуватися"},
                 {"erklären","объяснять","a1052","пояснювати"},
                 {"bleiben","оставаться","a1053","залишатися"},
-                {"erholen, sich","отдыхать","a1054", "відпочивати"},
+                {"erholen","отдыхать","a1054", "відпочивати"},
                 {"abbiegen","повернуть","a1055","повернути"},
                 {"heben","поднимать","a1056","піднімати"},
                 {"glauben","верить, полагать","a1057", "вірити, думати"},
@@ -1633,7 +1633,7 @@ public class Db1000Adapter {
                 {"sparen","экономить, копить","a1071","економити, збирати"},
                 {"streiten","спорить","a1072","сперечатись"},
                 {"zählen","считать","a1073","робити пiдрахунок"},
-                {"sorgen, sich","беспокоиться","a1074","турбуватися"},
+                {"sorgen","беспокоиться","a1074","турбуватися"},
                 {"scherzen","шутить","a1075","жартувати"},
         };
 
@@ -1643,7 +1643,7 @@ public class Db1000Adapter {
 
 
         String [][] allCurrentLesson44 = {
-                {"bewegen, sich","двигаться","a1076","рухатися"},
+                {"bewegen","двигаться","a1076","рухатися"},
                 {"passen","соответствовать, подходить","a1077","відповідати, підходити"},
                 {"sterben","умирать","a1078","вмирати"},
                 {"beeinflussen","влиять","a1079","впливати"},
@@ -1658,7 +1658,7 @@ public class Db1000Adapter {
                 {"vorstellen","представлять, знакомить","a1088","уявляти, знайомити"},
                 {"kennenlernen","узнавать, знакомиться","a1089", "дізнаватись, знайомитися"},
                 {"überzeugen","убеждать","a1090", "переконати"},
-                {"genehmigen","позволять, санкционировать, одобрять","a1091","дозволяти, санкціонувати, схвалювати"},
+                {"genehmigen","позволять, одобрять","a1091","дозволяти, схвалювати"},
                 {"sie","они","a660","вони"},
         };
 

@@ -26,7 +26,7 @@ public class DbFinishLesson {
     {
         private static final String DATABASE_NAME = "myDatabase";    // Database Name
         private static final String TABLE_NAME = "finish";   // Table Name
-        private static final int DATABASE_Version = 1;   // Database Version
+        private static final int DATABASE_Version = 2;   // Database Version
         private static final String UID="id";     // Column I (Primary Key)
         private static final String curs = "curs";    //Column II
         private static final String lesson= "lesson";    // Column III
